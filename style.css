@@ -12,9 +12,7 @@ body {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #ff6600;
     overflow: hidden;
-
     /* Força o preenchimento total e imersivo */
     width: 100vw;
     height: 100vh;
