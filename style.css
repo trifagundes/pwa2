@@ -2,9 +2,11 @@
 :root {
     /* Safe Areas (Default to 0px for Android and Desktop to prevent double status bar gaps) */
     --safe-top: 0px;
-    --safe-bottom: 0px;
-    --safe-left: 0px;
-    --safe-right: 0px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+
+    --app-bg: #61f392;
 }
 
 /* Inicializador de estilos globais */
@@ -14,6 +16,16 @@
     padding: 0;
 }
 
+/*
+  html precisa ter background-color e height 100% para cobrir:
+  - A área do notch/punch-hole no modo fullscreen
+  - A área da barra de navegação no modo standalone
+*/
+html {
+    height: 100%;
+    background-color: var(--app-bg);
+}
+
 
 
 
@@ -21,7 +33,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #61f392;
+    background-color: var(--app-bg);
     min-height: 100dvh;
     width: 100vw;
 
