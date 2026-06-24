@@ -6,22 +6,20 @@
     <title>PWA Simples</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
 </head>
-<body style="margin: 0; padding: 0; background-color: #ff6600; width: 100vw; height: 100dvh; overflow: hidden;">
+<body>
 
     <script>
-        // Função inicializadora isolada para o ecossistema do SPA
         function inicializarPWA() {
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker registrado com sucesso:', reg.scope))
-                    .catch(err => console.error('Falha ao registrar o Service Worker:', err));
+                    .then(reg => console.log('Service Worker registrado:', reg.scope))
+                    .catch(err => console.error('Erro no SW:', err));
             }
         }
 
-        // A função fica disponível para ser chamada pelo fluxo principal do seu SPA
-        window.inicializarPWA = inicializarPWA;
+        // Executa a inicialização do ecossistema SPA
+        inicializarPWA();
     </script>
 </body>
 </html>
