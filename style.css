@@ -29,6 +29,9 @@ body {
     width: 100vw;
     height: 100vh;
     height: 100dvh; /* Dynamic viewport height for mobile */
+
+    /* Garante que o padding seja calculado dentro dos 100dvh, sem estourar a tela */
+    box-sizing: border-box;
 }
 
 .app-container {
@@ -50,7 +53,7 @@ body {
 
 /* Header */
 .header {
-    padding: calc(1rem + var(--safe-area-top)) 1.5rem 1rem;
+    padding: 0px;
     position: fixed;
     top: 0;
     width: 100%;
