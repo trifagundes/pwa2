@@ -3,6 +3,9 @@
   "short_name": "AppLaranja",
   "start_url": "./index.html",
   "display": "fullscreen",
+  "display_override": [
+    "window-controls-overlay"
+  ],
   "background_color": "#ff6600",
   "theme_color": "#ff6600",
   "orientation": "portrait",
