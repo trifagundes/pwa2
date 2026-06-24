@@ -2,7 +2,7 @@
   "name": "Meu App Laranja 999",
   "short_name": "88",
   "start_url": "./index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "display_override": [
     "fullscreen",
     "standalone",
