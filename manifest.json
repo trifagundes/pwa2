@@ -2,7 +2,7 @@
   "name": "Meu App Laranja 777",
   "short_name": "AppLaranja7",
   "start_url": "./index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "display_override": [
     "fullscreen",
     "standalone",
