@@ -6,7 +6,11 @@
     --glass-border: rgba(255, 255, 255, 0.1);
     
     /* Env variables for safe areas in PWA (notches, etc) */
-    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-topa: env(safe-area-inset-top, 0px);
+    --safe-area-bottoma: env(safe-area-inset-bottom, 0px);
+
+        /* Env variables for safe areas in PWA (notches, etc) */
+    --safe-area-top: 0px;
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
