@@ -1,8 +1,8 @@
 {
-  "name": "Meu App Laranja 2",
+  "name": "Meu App Laranja 258",
   "short_name": "AppLaranja2",
   "start_url": "./index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "icons": [
     {
