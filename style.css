@@ -1,8 +1,8 @@
 /* CSS variables for variables / design tokens */
 :root {
-  /* Safe Areas (Default to 0px for Android and Desktop to prevent double status bar gaps) */
-  --safe-top: 0px;
-  --safe-bottom: 0px;
+    /* Safe Areas (Default to 0px for Android and Desktop to prevent double status bar gaps) */
+    --safe-top: 0px;
+    --safe-bottom: 0px;
     --safe-left: 0px;
     --safe-right: 0px;
 }
@@ -21,7 +21,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #61d1f3;
+    background-color: #61f392;
     min-height: 100dvh;
     width: 100vw;
 
