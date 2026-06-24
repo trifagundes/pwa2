@@ -1,11 +1,8 @@
 {
-  "name": "Meu App Laranja",
-  "short_name": "AppLaranja",
+  "name": "Meu App Laranja 2",
+  "short_name": "AppLaranja2",
   "start_url": "./index.html",
   "display": "fullscreen",
-  "display_override": [
-    "window-controls-overlay"
-  ],
   "background_color": "#ff6600",
   "theme_color": "#ff6600",
   "orientation": "portrait",
