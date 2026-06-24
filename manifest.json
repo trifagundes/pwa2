@@ -17,5 +17,7 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "theme_color": "#faf257",
+  "background_color": "#faf257"
 }
