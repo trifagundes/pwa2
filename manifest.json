@@ -3,10 +3,10 @@
   "short_name": "1 PWA App",
   "description": "Um PWA simples com Header e Bottom fullscreen cover.",
   "start_url": "index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "display_override": [
-    "fullscreen",
-    "standalone"
+    "standalone",
+    "fullscreen"
   ],  
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
