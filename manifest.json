@@ -1,6 +1,6 @@
 {
   "name": "Meu App Laranja 999",
-  "short_name": "AppLaranja7",
+  "short_name": "88",
   "start_url": "./index.html",
   "display": "fullscreen",
   "display_override": [
@@ -24,5 +24,5 @@
     }
   ],
   "theme_color": "#e639e3",
-  "background_color": "#faf257"
+  "background_color": "#070ad9"
 }
