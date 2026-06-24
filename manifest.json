@@ -3,8 +3,8 @@
   "short_name": "AppLaranja",
   "start_url": "./index.html",
   "display": "fullscreen",
-  "background_color": "#ff6600",
-  "theme_color": "#db0b8b",
+  "background_color": "#db0b8b",
+  "theme_color": "#ff6600",
   "orientation": "portrait",
   "icons": [
     {
