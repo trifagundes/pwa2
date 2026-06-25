@@ -112,6 +112,43 @@ function playSound(type) {
 }
 
 // --------------------------------------------------------------------------
+// 2.5. NOTIFICAÇÕES NATIVAS (Notification API)
+// --------------------------------------------------------------------------
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission().then(permission => {
+      console.log(`Permissão de notificação: ${permission}`);
+    });
+  }
+}
+
+function sendTimerNotification() {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  
+  const mode = state.pomodoro.currentMode;
+  const isFocus = mode === 'focus';
+  const title = isFocus ? 'Foco Concluído! 🎯' : 'Intervalo Concluído! ☕';
+  const body = isFocus 
+    ? 'Excelente trabalho! Hora de fazer uma pausa e relaxar.' 
+    : 'Hora de voltar ao foco. Vamos lá!';
+  
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(registration => {
+      registration.showNotification(title, {
+        body: body,
+        icon: 'icon-192.png',
+        badge: 'icon-192.png',
+        vibrate: [300, 100, 300],
+        tag: 'zenfocus-timer-end',
+        renotify: true
+      });
+    });
+  } else {
+    new Notification(title, { body });
+  }
+}
+
+// --------------------------------------------------------------------------
 // 3. LOGICA DO CRONÔMETRO POMODORO
 // --------------------------------------------------------------------------
 function updateTimerDisplay() {
@@ -176,6 +213,7 @@ function setTimerMode(mode) {
 
 function toggleTimer() {
   playSound('click');
+  requestNotificationPermission();
   
   if (state.pomodoro.isPaused) {
     // Inicia Cronômetro
@@ -196,6 +234,7 @@ function toggleTimer() {
         state.pomodoro.isPaused = true;
         
         playSound('complete');
+        sendTimerNotification();
         
         // Transição automática de modo
         if (state.pomodoro.currentMode === 'focus') {
