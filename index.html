@@ -52,129 +52,132 @@
   </header>
 
   <!-- Área de Conteúdo Principal -->
-  <main class="relative z-10 flex-1 overflow-y-auto px-4 py-6 md:px-8 md:py-8 max-w-xl mx-auto w-full flex flex-col justify-center">
-    
-    <!-- ABA 1: CRONÔMETRO POMODORO (Ativa por padrão) -->
-    <section id="pomodoro-view" class="w-full flex flex-col items-center space-y-6 transition-all duration-300 ease-out transform opacity-100 translate-x-0 scale-100 pointer-events-auto">
+  <main class="relative z-10 flex-1 overflow-hidden w-full max-w-xl mx-auto flex flex-col">
+    <!-- Contêiner de Abas Deslizante -->
+    <div id="tab-wrapper" class="flex w-[200%] h-full transition-transform duration-300 ease-out transform translate-x-0">
       
-      <!-- Seletor de Modo (Foco / Descanso Curto / Descanso Longo) -->
-      <div class="flex p-1.5 rounded-2xl bg-white/[0.03] border border-white/5 w-full max-w-sm">
-        <button id="mode-focus" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md">
-          Foco
-        </button>
-        <button id="mode-short" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold tracking-wide text-slate-400 hover:text-slate-200 transition-all duration-300">
-          Curto
-        </button>
-        <button id="mode-long" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold tracking-wide text-slate-400 hover:text-slate-200 transition-all duration-300">
-          Longo
-        </button>
-      </div>
-
-      <!-- Display Circular do Timer -->
-      <div class="relative w-72 h-72 md:w-80 md:h-80 flex items-center justify-center animate-float">
-        <!-- SVG Círculo de Progresso -->
-        <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
-          <!-- Círculo de Fundo -->
-          <circle cx="55" cy="55" r="44" class="stroke-white/[0.02]" stroke-width="3" fill="none" transform="translate(-5, -5)" />
-          <!-- Círculo de Progresso Ativo -->
-          <circle id="timer-progress" cx="55" cy="55" r="44" class="timer-circle stroke-violet-500" stroke-width="3.5" stroke-dasharray="276.46" stroke-dashoffset="0" stroke-linecap="round" fill="none" transform="translate(-5, -5)" />
-        </svg>
-
-        <!-- Texto do Cronômetro -->
-        <div class="relative flex flex-col items-center text-center">
-          <div id="timer-display" class="text-6xl md:text-7xl font-light tracking-tight tabular-nums font-sans">25:00</div>
-          <div id="timer-status-text" class="text-xs font-bold tracking-widest text-violet-400 uppercase mt-2">Hora de Focar</div>
+      <!-- ABA 1: CRONÔMETRO POMODORO (Ativa por padrão) -->
+      <section id="pomodoro-view" class="w-1/2 flex-shrink-0 flex flex-col items-center justify-center space-y-6 px-6 py-4">
+        
+        <!-- Seletor de Modo (Foco / Descanso Curto / Descanso Longo) -->
+        <div class="flex p-1.5 rounded-2xl bg-white/[0.03] border border-white/5 w-full max-w-sm">
+          <button id="mode-focus" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md">
+            Foco
+          </button>
+          <button id="mode-short" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold tracking-wide text-slate-400 hover:text-slate-200 transition-all duration-300">
+            Curto
+          </button>
+          <button id="mode-long" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold tracking-wide text-slate-400 hover:text-slate-200 transition-all duration-300">
+            Longo
+          </button>
         </div>
-      </div>
 
-      <!-- Controles (Play, Pause, Reset) -->
-      <div class="flex items-center space-x-6">
-        <!-- Reset -->
-        <button id="timer-reset" class="w-12 h-12 rounded-full flex items-center justify-center glass-button text-slate-400 hover:text-white" title="Reiniciar">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H17" />
+        <!-- Display Circular do Timer -->
+        <div class="relative w-72 h-72 md:w-80 md:h-80 flex items-center justify-center animate-float">
+          <!-- SVG Círculo de Progresso -->
+          <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <!-- Círculo de Fundo -->
+            <circle cx="55" cy="55" r="44" class="stroke-white/[0.02]" stroke-width="3" fill="none" transform="translate(-5, -5)" />
+            <!-- Círculo de Progresso Ativo -->
+            <circle id="timer-progress" cx="55" cy="55" r="44" class="timer-circle stroke-violet-500" stroke-width="3.5" stroke-dasharray="276.46" stroke-dashoffset="0" stroke-linecap="round" fill="none" transform="translate(-5, -5)" />
           </svg>
-        </button>
 
-        <!-- Play / Pause -->
-        <button id="timer-toggle" class="w-20 h-20 rounded-full flex items-center justify-center bg-white text-slate-950 hover:bg-slate-100 hover:scale-105 active:scale-95 shadow-xl shadow-white/10 neon-glow-violet transition-all duration-300">
-          <svg id="play-icon" class="w-8 h-8 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          <svg id="pause-icon" class="w-8 h-8 hidden" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-          </svg>
-        </button>
-
-        <!-- Pular Sessão -->
-        <button id="timer-skip" class="w-12 h-12 rounded-full flex items-center justify-center glass-button text-slate-400 hover:text-white" title="Pular">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Indicador de Ciclos -->
-      <div class="glass-card px-4 py-2.5 rounded-2xl flex items-center space-x-3 text-xs text-slate-400">
-        <span class="flex h-2 w-2 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
-        </span>
-        <span class="font-medium">Sessão: <span id="session-count" class="text-white font-bold">#1</span></span>
-      </div>
-
-    </section>
-
-    <!-- ABA 2: RASTREADOR DE HÁBITOS (Escondida por padrão) -->
-    <section id="habits-view" class="w-full flex flex-col space-y-5 transition-all duration-300 ease-in transform opacity-0 translate-x-12 scale-95 pointer-events-none absolute max-w-xl">
-      
-      <!-- Título & Resumo -->
-      <div class="flex items-end justify-between">
-        <div>
-          <h2 class="text-2xl font-bold tracking-tight text-white">Hábitos de Hoje</h2>
-          <p id="current-date" class="text-xs text-slate-400 mt-0.5">Quarta-feira, 24 de Junho</p>
+          <!-- Texto do Cronômetro -->
+          <div class="relative flex flex-col items-center text-center">
+            <div id="timer-display" class="text-6xl md:text-7xl font-light tracking-tight tabular-nums font-sans">25:00</div>
+            <div id="timer-status-text" class="text-xs font-bold tracking-widest text-violet-400 uppercase mt-2">Hora de Focar</div>
+          </div>
         </div>
-        <div class="text-right">
-          <span class="text-xs font-bold text-violet-400 tracking-wider uppercase">Progresso</span>
-          <div class="text-lg font-extrabold text-white"><span id="habits-completed">0</span>/<span id="habits-total">0</span></div>
-        </div>
-      </div>
 
-      <!-- Barra de Progresso Geral -->
-      <div class="w-full h-2 bg-white/[0.03] border border-white/5 rounded-full overflow-hidden">
-        <div id="habits-progress-bar" class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full transition-all duration-500" style="width: 0%"></div>
-      </div>
-
-      <!-- Input para Adicionar Novo Hábito -->
-      <form id="add-habit-form" class="flex gap-2">
-        <input type="text" id="new-habit-input" placeholder="Novo hábito (ex: Beber água)..." required class="flex-1 px-4 py-3 rounded-xl bg-white/[0.02] border border-white/5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 focus:bg-white/[0.04] transition-all">
-        <button type="submit" class="p-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-semibold shadow-md active:scale-95 transition-all">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-        </button>
-      </form>
-
-      <!-- Lista de Hábitos -->
-      <div class="flex-1 min-h-[220px] max-h-[340px] overflow-y-auto pr-1">
-        <ul id="habits-list" class="space-y-2.5">
-          <!-- Hábitos inseridos dinamicamente pelo JS -->
-        </ul>
-        <div id="habits-empty-state" class="flex flex-col items-center justify-center text-center py-10 space-y-3">
-          <div class="w-12 h-12 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center text-slate-500">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        <!-- Controles (Play, Pause, Reset) -->
+        <div class="flex items-center space-x-6">
+          <!-- Reset -->
+          <button id="timer-reset" class="w-12 h-12 rounded-full flex items-center justify-center glass-button text-slate-400 hover:text-white" title="Reiniciar">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H17" />
             </svg>
-          </div>
+          </button>
+
+          <!-- Play / Pause -->
+          <button id="timer-toggle" class="w-20 h-20 rounded-full flex items-center justify-center bg-white text-slate-950 hover:bg-slate-100 hover:scale-105 active:scale-95 shadow-xl shadow-white/10 neon-glow-violet transition-all duration-300">
+            <svg id="play-icon" class="w-8 h-8 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            <svg id="pause-icon" class="w-8 h-8 hidden" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          </button>
+
+          <!-- Pular Sessão -->
+          <button id="timer-skip" class="w-12 h-12 rounded-full flex items-center justify-center glass-button text-slate-400 hover:text-white" title="Pular">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Indicador de Ciclos -->
+        <div class="glass-card px-4 py-2.5 rounded-2xl flex items-center space-x-3 text-xs text-slate-400">
+          <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
+          </span>
+          <span class="font-medium">Sessão: <span id="session-count" class="text-white font-bold">#1</span></span>
+        </div>
+
+      </section>
+
+      <!-- ABA 2: RASTREADOR DE HÁBITOS -->
+      <section id="habits-view" class="w-1/2 flex-shrink-0 flex flex-col justify-center space-y-5 px-6 py-4">
+        
+        <!-- Título & Resumo -->
+        <div class="flex items-end justify-between">
           <div>
-            <p class="text-sm font-semibold text-slate-400">Nenhum hábito cadastrado</p>
-            <p class="text-xs text-slate-500 mt-1">Crie seus hábitos acima para começar a rastrear.</p>
+            <h2 class="text-2xl font-bold tracking-tight text-white">Hábitos de Hoje</h2>
+            <p id="current-date" class="text-xs text-slate-400 mt-0.5">Quarta-feira, 24 de Junho</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-bold text-violet-400 tracking-wider uppercase">Progresso</span>
+            <div class="text-lg font-extrabold text-white"><span id="habits-completed">0</span>/<span id="habits-total">0</span></div>
           </div>
         </div>
-      </div>
 
-    </section>
+        <!-- Barra de Progresso Geral -->
+        <div class="w-full h-2 bg-white/[0.03] border border-white/5 rounded-full overflow-hidden">
+          <div id="habits-progress-bar" class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
 
+        <!-- Input para Adicionar Novo Hábito -->
+        <form id="add-habit-form" class="flex gap-2">
+          <input type="text" id="new-habit-input" placeholder="Novo hábito (ex: Beber água)..." required class="flex-1 px-4 py-3 rounded-xl bg-white/[0.02] border border-white/5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 focus:bg-white/[0.04] transition-all">
+          <button type="submit" class="p-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-semibold shadow-md active:scale-95 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+        </form>
+
+        <!-- Lista de Hábitos -->
+        <div class="flex-1 min-h-[220px] max-h-[340px] overflow-y-auto pr-1">
+          <ul id="habits-list" class="space-y-2.5">
+            <!-- Hábitos inseridos dinamicamente pelo JS -->
+          </ul>
+          <div id="habits-empty-state" class="flex flex-col items-center justify-center text-center py-10 space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center text-slate-500">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-400">Nenhum hábito cadastrado</p>
+              <p class="text-xs text-slate-500 mt-1">Crie seus hábitos acima para começar a rastrear.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      
+    </div>
   </main>
 
   <!-- Barra de Navegação Inferior (Bottom Navigation) -->
