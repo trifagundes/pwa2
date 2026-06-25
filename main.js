@@ -6,6 +6,7 @@
 // 1. GERENCIAMENTO DE ESTADO E INICIALIZAÇÃO
 // --------------------------------------------------------------------------
 const state = {
+  currentTab: 'pomodoro',
   pomodoro: {
     timerId: null,
     isPaused: true,
@@ -31,6 +32,7 @@ const DOM = {
   navHabits: document.getElementById('nav-habits'),
   pomodoroView: document.getElementById('pomodoro-view'),
   habitsView: document.getElementById('habits-view'),
+  mainContainer: document.querySelector('main'),
 
   // Pomodoro
   timerDisplay: document.getElementById('timer-display'),
@@ -418,15 +420,23 @@ function switchTab(tab) {
   const inactiveBtnClass = 'flex flex-col items-center space-y-1 py-1 px-5 rounded-2xl text-slate-400 hover:text-slate-200 transition-all duration-300';
   
   if (tab === 'pomodoro') {
-    DOM.pomodoroView.classList.remove('hidden');
-    DOM.habitsView.classList.add('hidden');
+    // Pomodoro entra (ativo)
+    DOM.pomodoroView.className = 'w-full flex flex-col items-center space-y-6 transition-all duration-300 ease-out transform opacity-100 translate-x-0 scale-100 pointer-events-auto';
+    // Hábitos sai para a direita (inativo)
+    DOM.habitsView.className = 'w-full flex flex-col space-y-5 transition-all duration-300 ease-in transform opacity-0 translate-x-12 scale-95 pointer-events-none absolute max-w-xl';
+    
     DOM.navPomodoro.className = activeBtnClass;
     DOM.navHabits.className = inactiveBtnClass;
+    state.currentTab = 'pomodoro';
   } else {
-    DOM.pomodoroView.classList.add('hidden');
-    DOM.habitsView.classList.remove('hidden');
+    // Pomodoro sai para a esquerda (inativo)
+    DOM.pomodoroView.className = 'w-full flex flex-col items-center space-y-6 transition-all duration-300 ease-in transform opacity-0 -translate-x-12 scale-95 pointer-events-none absolute max-w-xl';
+    // Hábitos entra (ativo)
+    DOM.habitsView.className = 'w-full flex flex-col space-y-5 transition-all duration-300 ease-out transform opacity-100 translate-x-0 scale-100 pointer-events-auto';
+    
     DOM.navPomodoro.className = inactiveBtnClass;
     DOM.navHabits.className = activeBtnClass;
+    state.currentTab = 'habits';
   }
 }
 
@@ -470,6 +480,36 @@ function setupEventListeners() {
   // Navegação
   DOM.navPomodoro.addEventListener('click', () => switchTab('pomodoro'));
   DOM.navHabits.addEventListener('click', () => switchTab('habits'));
+  
+  // Gestos de Deslizar (Swipe)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+
+  DOM.mainContainer.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  DOM.mainContainer.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    
+    const minSwipeDistance = 70; // pixels
+    const maxVerticalDeviation = 50; // pixels
+    
+    if (Math.abs(diffX) > minSwipeDistance && Math.abs(diffY) < maxVerticalDeviation) {
+      if (diffX < 0 && state.currentTab === 'pomodoro') {
+        switchTab('habits');
+      } else if (diffX > 0 && state.currentTab === 'habits') {
+        switchTab('pomodoro');
+      }
+    }
+  }, { passive: true });
   
   // Pomodoro
   DOM.btnModeFocus.addEventListener('click', () => setTimerMode('focus'));
