@@ -89,3 +89,19 @@
 .safe-padding-bottom {
   padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 }
+
+/* Fix Webpushr Modal Overflow on Mobile */
+div[id^="webpushr-"],
+.webpushr-prompt,
+.webpushr-bell-panel {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
+
+/* Garante que o painel interno não ultrapasse a tela */
+#webpushr-prompt-wrapper {
+  max-width: 95vw !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin: 0 !important;
+}
