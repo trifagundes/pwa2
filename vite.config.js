@@ -15,7 +15,7 @@ export default defineConfig({
         description: 'Um aplicativo PWA moderno e elegante para manter o foco e rastrear hábitos diários.',
         theme_color: '#0f172a',
         background_color: '#0f172a',
-        display: 'standalone',
+        display: 'fullscreen',
         orientation: 'portrait',
         start_url: '/pwa2/',
         scope: '/pwa2/',

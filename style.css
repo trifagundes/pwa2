@@ -82,6 +82,10 @@
 }
 
 /* Safe area padding for mobile screens */
+.safe-padding-top {
+  padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+}
+
 .safe-padding-bottom {
   padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 }
