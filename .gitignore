@@ -15,4 +15,6 @@ yarn-debug.log*
 .vscode/
 .idea/
 .DS_Store
+__MACOSX/
+_macosx/
 Thumbs.db
