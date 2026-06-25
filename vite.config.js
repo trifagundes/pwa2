@@ -39,7 +39,8 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}']
+        globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
+        importScripts: ['https://cdn.webpushr.com/sw-server.min.js']
       }
     })
   ]
